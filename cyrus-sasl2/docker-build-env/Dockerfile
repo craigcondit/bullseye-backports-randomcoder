@@ -4,9 +4,12 @@ MAINTAINER ccondit@randomcoder.org
 ADD assets /assets
 
 RUN \
-	echo "deb http://ftp.us.debian.org/debian bullseye main non-free contrib" > /etc/apt/sources.list && \
-	echo "deb http://security.debian.org/ bullseye/updates main contrib non-free" >> /etc/apt/sources.list && \
-	echo "deb-src http://ftp.us.debian.org/debian bullseye main contrib non-free" >> /etc/apt/sources.list && \
+	echo "deb http://httpredir.debian.org/debian bullseye main non-free contrib" > /etc/apt/sources.list && \
+	echo "deb-src http://httpredir.debian.org/debian bullseye main contrib non-free" >> /etc/apt/sources.list && \
+	echo "deb http://security.debian.org/debian-security bullseye-security main non-free contrib" >> /etc/apt/sources.list && \
+	echo "deb-src http://security.debian.org/debian-security bullseye-security main contrib non-free" >> /etc/apt/sources.list && \
+	echo "deb http://httpredir.debian.org/debian/ bullseye-updates main non-free contrib" >> /etc/apt/sources.list && \
+	echo "deb-src http://httpredir.debian.org/debian/ bullseye-updates main contrib non-free" >> /etc/apt/sources.list && \
 	apt-get update && \
 	apt-get -y install gnupg2 ca-certificates && \
 	apt-key add /assets/bintray-public.key.asc && \
