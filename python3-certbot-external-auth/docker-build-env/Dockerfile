@@ -5,7 +5,7 @@ ADD assets /assets
 
 RUN \
 	echo "deb http://ftp.us.debian.org/debian bullseye main non-free contrib" > /etc/apt/sources.list && \
-	echo "deb http://security.debian.org/ bullseye/updates main contrib non-free" >> /etc/apt/sources.list && \
+        echo "deb http://security.debian.org/debian-security bullseye-security main contrib non-free" >> /etc/apt/sources.list && \
 	echo "deb-src http://ftp.us.debian.org/debian sid main contrib non-free" >> /etc/apt/sources.list && \
 	apt-get update && \
 	apt-get -y install gnupg2 && \
@@ -24,15 +24,15 @@ ADD patches /patches
 
 RUN \
 	apt-get update && \
-	apt-get -y install python-stdeb python3-setuptools && \
+	apt-get -y install python3-stdeb python3-setuptools && \
 	cd /build && \
-	curl -O \
-                'https://files.pythonhosted.org/packages/6e/85/6bb20dfb49f2cdb86988c37bc886c39b9a06419694a5ca2a600c3fe463d6/certbot-external-auth-0.1.0.tar.gz' && \
+        curl -O \
+                'https://files.pythonhosted.org/packages/bd/ca/204b2d13bfcaac1c7be6e76fc473a8a339570734884b952b5440e853a7ea/certbot-external-auth-0.1.2.tar.gz' && \
 	py2dsc \
                 --with-python3=True --with-python2=False \
 		--suite bullseye-backports-randomcoder \
 		--maintainer 'Craig Condit <ccondit@randomcoder.org>' \
-		certbot-external-auth-0.1.0.tar.gz && \
+		certbot-external-auth-0.1.2.tar.gz && \
 	cd deb_dist && \
 	cd certbot-external-auth-* && \
 	export DEBEMAIL=ccondit@randomcoder.org && \
